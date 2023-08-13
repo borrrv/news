@@ -1,19 +1,21 @@
-from users.authentication import CustomAuthentication
-from rest_framework.viewsets import ModelViewSet
-from news.models import News, Comments
-from .serializers import NewsSerializer, CommentSerializer
-from rest_framework.authtoken.views import ObtainAuthToken
-from .permissions import IsAuthorOrAdmin
-from rest_framework.decorators import action
 from django.shortcuts import get_object_or_404
-from rest_framework.response import Response
-from rest_framework.status import HTTP_201_CREATED, HTTP_405_METHOD_NOT_ALLOWED, HTTP_204_NO_CONTENT
-from rest_framework.permissions import SAFE_METHODS
+from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import SAFE_METHODS
+from rest_framework.response import Response
+from rest_framework.status import (HTTP_201_CREATED, HTTP_204_NO_CONTENT,
+                                   HTTP_405_METHOD_NOT_ALLOWED)
+from rest_framework.viewsets import ModelViewSet
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+from news.models import Comments, News
+
+from .permissions import IsAuthorOrAdmin
+from .serializers import CommentSerializer, NewsSerializer
 
 
-class GetAuthToken(ObtainAuthToken):
-    authentication_classes = [CustomAuthentication]
+class GetAuthToken(TokenObtainPairView):
+    authentication_classes = []
 
 
 class NewsViewSet(ModelViewSet):

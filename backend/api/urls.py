@@ -1,8 +1,7 @@
-from django.urls import path, include
-from .views import GetAuthToken
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from .views import NewsViewSet, CommentViewSet
 
+from .views import CommentViewSet, GetAuthToken, NewsViewSet
 
 router = DefaultRouter()
 
