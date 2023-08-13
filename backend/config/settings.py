@@ -63,7 +63,7 @@ DATABASES = {
         "ENGINE": os.getenv("DB_ENGINE"),
         "NAME": os.getenv("DB_NAME"),
         "USER": os.getenv("POSTGRES_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
         "HOST": os.getenv("HOST"),
         "PORT": os.getenv("PORT"),
     }
@@ -93,7 +93,11 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
