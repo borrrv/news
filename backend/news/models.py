@@ -3,6 +3,7 @@ from users.models import Users
 
 
 class BaseModel(models.Model):
+    """Базовая модель с текстом и датой публикации"""
     text = models.TextField('Текст')
     pub_date = models.DateTimeField(
         'Дата публикации',
@@ -14,6 +15,7 @@ class BaseModel(models.Model):
 
 
 class News(BaseModel):
+    """Модель новостей"""
     title = models.CharField(
         "Название новости",
         max_length=100,
@@ -23,6 +25,12 @@ class News(BaseModel):
         verbose_name="Автор",
         on_delete=models.CASCADE,
         related_name="news",
+    )
+    likes = models.ManyToManyField(
+        Users,
+        default=0,
+        verbose_name="Лайки",
+        related_name='likes',
     )
 
     class Meta:
@@ -35,6 +43,7 @@ class News(BaseModel):
 
 
 class Comments(BaseModel):
+    """Модель комментариев"""
     author = models.ForeignKey(
         Users,
         verbose_name="Автор",

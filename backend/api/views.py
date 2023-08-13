@@ -7,7 +7,7 @@ from .permissions import IsAuthorOrAdmin
 from rest_framework.decorators import action
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
-from rest_framework.status import HTTP_201_CREATED, HTTP_405_METHOD_NOT_ALLOWED
+from rest_framework.status import HTTP_201_CREATED, HTTP_405_METHOD_NOT_ALLOWED, HTTP_204_NO_CONTENT
 from rest_framework.permissions import SAFE_METHODS
 from rest_framework.pagination import PageNumberPagination
 
@@ -55,6 +55,19 @@ class NewsViewSet(ModelViewSet):
                 context={'request': request},
             )
             return paginator.get_paginated_response(serializer.data)
+
+    @action(methods=['POST', 'DELETE'], detail=True)
+    def like(self, request, pk=None):
+        user = self.request.user
+        news = get_object_or_404(News, pk=pk)
+        if self.request.method == 'POST':
+            news.likes.add(user)
+            content = {"message": "Вы поставили лайк на новость"}
+            return Response(content, status=HTTP_201_CREATED)
+        if self.request.method == 'DELETE':
+            news.likes.remove(user)
+            content = {"message": "Вы убрали лайк с новости"}
+            return Response(content, status=HTTP_204_NO_CONTENT)
 
 
 class CommentViewSet(ModelViewSet):
