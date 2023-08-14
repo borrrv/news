@@ -16,13 +16,12 @@ from .serializers import CommentSerializer, NewsSerializer
 
 class GetAuthToken(TokenObtainPairView):
     permission_classes = (AllowAny,)
-    #authentication_classes = []
 
 
 class NewsViewSet(ModelViewSet):
     queryset = News.objects.all().select_related('author')
     serializer_class = NewsSerializer
-    methods = ['POST', 'PUT', 'DELETE']
+    methods = ['POST', 'PUT', 'DELETE', 'PATCH']
 
     def get_permissions(self):
         if self.request.method in self.methods:
