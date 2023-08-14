@@ -29,7 +29,7 @@ class News(BaseModel):
     )
     likes = models.ManyToManyField(
         Users,
-        default=0,
+        blank=True,
         verbose_name="Лайки",
         related_name='likes',
     )

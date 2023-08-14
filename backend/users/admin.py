@@ -1,9 +1,10 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 
 from .models import Users
 
 
-class UsersAdmin(admin.ModelAdmin):
+class UsersAdmin(UserAdmin):
     list_display = (
         'id',
         'username',
