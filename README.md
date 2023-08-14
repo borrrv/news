@@ -8,7 +8,7 @@
 ```
 git clone https://github.com/borrrv/news.git
 ```
-- Переименовать файлы ```env_example``` в ```.env```
+- Переименовать файлы ```.env_example``` в ```.env```
 - В консоле перейти в папку с файлом ```docker-compose.yml```
 - Выполнить команду
 ```

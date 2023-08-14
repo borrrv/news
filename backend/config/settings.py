@@ -25,7 +25,6 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "news.apps.NewsConfig",
     "rest_framework",
-    "rest_framework.authtoken",
 ]
 
 MIDDLEWARE = [
